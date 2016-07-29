@@ -162,6 +162,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
+    <Content Include="Views\Home\AdminOnly.cshtml" />
+    <Content Include="Views\Home\UnAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -198,9 +201,11 @@
       <DependentUpon>DemoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityManager\UserManager.cs" />
+    <Compile Include="Models\ViewModel\UserLoginView.cs" />
     <Compile Include="Models\ViewModel\UserModel.cs" />
     <Compile Include="Models\ViewModel\UserSignUpView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AuthorizedRoleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using MVC5RealWorld.Security;
 
 namespace MVC5RealWorld.Controllers
 {
@@ -11,6 +12,17 @@ namespace MVC5RealWorld.Controllers
 
         [Authorize]
         public ActionResult Welcome()
+        {
+            return View();
+        }
+
+        [AuthorizeRoles("Admin")]
+        public ActionResult AdminOnly()
+        {
+            return View();
+        }
+
+        public ActionResult UnAuthorized()
         {
             return View();
         }
