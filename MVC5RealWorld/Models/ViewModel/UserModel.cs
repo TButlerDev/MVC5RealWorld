@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations;
 namespace MVC5RealWorld.Models.ViewModel
 {
     
-}
 
 public class UserProfileView
 {
@@ -63,3 +62,4 @@ public class UserDataView
     public UserGender UserGender { get; set; }
 }
 
+}
