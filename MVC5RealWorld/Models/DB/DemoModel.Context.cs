@@ -33,5 +33,7 @@ namespace MVC5RealWorld.Models.DB
         public System.Data.Entity.DbSet<MVC5RealWorld.Models.ViewModel.UserSignUpView> UserSignUpViews { get; set; }
 
         public System.Data.Entity.DbSet<MVC5RealWorld.Models.ViewModel.UserLoginView> UserLoginViews { get; set; }
+
+        public System.Data.Entity.DbSet<MVC5RealWorld.Models.ViewModel.UserProfileView> UserProfileViews { get; set; }
     }
 }

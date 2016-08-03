@@ -268,6 +268,78 @@ namespace MVC5RealWorld.Models.EntityManager
             }
         }
 
+        public void DeleteUser(int userID)
+        {
+            using (DemoDBEntities db = new DemoDBEntities())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+
+                        var SUR = db.SYSUserRoles.Where(o => o.SYSUserID == userID);
+                        if (SUR.Any())
+                        {
+                            db.SYSUserRoles.Remove(SUR.FirstOrDefault());
+                            db.SaveChanges();
+                        }
+
+                        var SUP = db.SYSUserProfiles.Where(o => o.SYSUserID == userID);
+                        if (SUP.Any())
+                        {
+                            db.SYSUserProfiles.Remove(SUP.FirstOrDefault());
+                            db.SaveChanges();
+                        }
+
+                        var SU = db.SYSUsers.Where(o => o.SYSUserID == userID);
+                        if (SU.Any())
+                        {
+                            db.SYSUsers.Remove(SU.FirstOrDefault());
+                            db.SaveChanges();
+                        }
+
+                        dbContextTransaction.Commit();
+                    }
+                    catch
+                    {
+                        dbContextTransaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        public UserProfileView GetUserProfile(int userID)
+        {
+            UserProfileView UPV = new UserProfileView();
+            using (DemoDBEntities db = new DemoDBEntities())
+            {
+                var user = db.SYSUsers.Find(userID);
+                if (user != null)
+                {
+                    UPV.SYSUserID = user.SYSUserID;
+                    UPV.LoginName = user.LoginName;
+                    UPV.Password = user.PasswordEncryptedText;
+
+                    var SUP = db.SYSUserProfiles.Find(userID);
+                    if (SUP != null)
+                    {
+                        UPV.FirstName = SUP.FirstName;
+                        UPV.LastName = SUP.LastName;
+                        UPV.Gender = SUP.Gender;
+                    }
+
+                    var SUR = db.SYSUserRoles.Find(userID);
+                    if (SUR != null)
+                    {
+                        UPV.LOOKUPRoleID = SUR.LOOKUPRoleID;
+                        UPV.RoleName = SUR.LOOKUPRole.RoleName;
+                        UPV.IsRoleActive = SUR.IsActive;
+                    }
+                }
+            }
+            return UPV;
+        }
+
 
     }
 }
